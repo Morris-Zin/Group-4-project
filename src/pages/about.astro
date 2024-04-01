@@ -1,53 +1,91 @@
 ---
-import { getCollection } from "astro:content";
-import { Picture } from "astro:assets";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
 
-// Filter team entries with 'draft: false' & date before current date
-const publishedTeamMembers = await getCollection("team", ({ data }) => {
-  return !data.draft && data.publishDate < new Date();
-});
+const TeamImg1 = "https://source.unsplash.com/IF9TK5Uy-KI";
+const TeamImg2 = "https://source.unsplash.com/iEEBWgY_6lA";
+const TeamImg3 = "https://source.unsplash.com/ZHvM3XIOHoE";
+
+const team = [
+  {
+    name: "Shoon",
+    title: "Biologist",
+    avatar: {
+      src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkbXPAXMYtq2CgfZbbmdPI4lJblbqJU_oHJcRDqGaqvQ&s",
+      width: 480,
+      height: 560,
+    },
+  },
+  {
+    name: "Adnan",
+    title: "Computer Scientist",
+    avatar: {
+      src: "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_1600,w_1189,x_0,y_0/c_scale,w_640/v1396557007/ratatouille-production-stills-ratatouille-1847049-1902-2560_wgszv1.jpg",
+      width: 580,
+      height: 580,
+    },
+  },
+  {
+    name: "Aiden",
+    title: "Chemist",
+    avatar: {
+      src: "https://images.alphacoders.com/133/1337741.jpeg",
+      width: 580,
+      height: 580,
+    },
+  },
+  {
+    name: "Morris",
+    title: "Physicist",
+    avatar: {
+      src: "https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj",
+      width: 580,
+      height: 580,
+    },
+  },
+  {
+    name: "Min Lat Soe",
+    title: "Environmental Systems and Societies Expert",
+    avatar: {
+      src: "https://qph.cf2.quoracdn.net/main-qimg-225dcd4de6b57dbad09b5cb4fe371378-lq",
+      width: 580,
+      height: 580,
+    },
+  },
+];
 ---
 
 <Layout title="About">
   <Container>
     <Sectionhead>
-      <Fragment slot="title">About</Fragment>
-      <Fragment slot="desc">We are a small passionate team.</Fragment>
+      <Fragment slot="title">About Us</Fragment>
+      <Fragment slot="desc">We are a small passionate team of 5.</Fragment>
     </Sectionhead>
 
     <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-16">
       <h2 class="font-bold text-3xl text-gray-800">
-        Empowering the world with Astro.
+        Empowering the world with by contributing with our knowledge.
       </h2>
       <p class="text-lg leading-relaxed text-slate-500">
-        We're a multi-cultural team from around the world! We come from diverse
-        backgrounds, bringing different personalities, experiences and skills to
-        the job. This is what makes our team so special.
+
       </p>
     </div>
     <div class="grid md:grid-cols-3 gap-10 mx-auto max-w-4xl mt-12">
       {
-        publishedTeamMembers.map((teamMemberEntry) => (
+        team.map((item) => (
           <div class="group">
             <div class="w-full aspect-square">
-              <Picture
-                src={teamMemberEntry.data.avatar.src}
-                alt={teamMemberEntry.data.avatar.alt}
-                sizes="(max-width: 800px) 100vw, 400px"
-                width={400}
-                height={400}
-                class="w-full rounded-md rounded transition group-hover:-translate-y-1 group-hover:shadow-xl bg-white object-cover object-center aspect-square"
+              <img
+              src={item.avatar.src}
+                alt="Team"
+                class="w-full h-full object-cover rounded transition  group-hover:-translate-y-1 group-hover:shadow-xl"
               />
             </div>
 
             <div class="mt-4 text-center">
-              <h2 class="text-lg text-gray-800">{teamMemberEntry.data.name}</h2>
-              <h3 class="text-sm text-slate-500">
-                {teamMemberEntry.data.title}
-              </h3>
+              <h2 class="text-lg text-gray-800"> {item.name}</h2>
+              <h3 class="text-sm text-slate-500"> {item.title}</h3>
             </div>
           </div>
         ))
